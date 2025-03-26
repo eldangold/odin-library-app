@@ -11,7 +11,35 @@
 
 <body>
     <div id="main-container">
-
+        <div class="control-buttons">
+            <button id="open-add-book-dialog" class="control-button">Add new book</button>
+            <button class="control-button">Remove all books</button>
+        </div>
+        <div id="bookshelf"></div>
+        <dialog id="add-book-dialog">
+            <form>
+                <label>
+                    Book name
+                    <input type="text" name="title">
+                </label>
+                <label>
+                    Author
+                    <input type="text" name="author">
+                </label>
+                <label>
+                    Pages count
+                    <input type="number" min="1" name="pages">
+                </label>
+                <label>
+                    Is book read?
+                    <input type="checkbox" name="isRead">
+                </label>
+                <div class="form-buttons">
+                    <button class="form-button" type="submit">Add</button>
+                    <button id="close-add-book-dialog" class="form-button">Cancel</button>
+                </div>
+            </form>
+        </dialog>
     </div>
 </body>
 

@@ -1,4 +1,5 @@
 const myLibrary = [];
+let updatedLibrary = [];
 
 function Book(title, author, pages, isRead, id) {
   this.title = title;
@@ -12,44 +13,63 @@ function addNewBook(title, author, pages, isRead) {
   myLibrary.push(new Book(title, author, pages, isRead, crypto.randomUUID()));
 }
 
-addNewBook("Dummy Book", "Dummy Author", 295, "No");
-addNewBook("Dummy Book 2", "Dummy Author 2", 255, "Yes");
-addNewBook("Dummy Book 3", "Dummy Author 3", 295, "No");
-addNewBook("Dummy Book 3", "Dummy Author 4", 255, "Yes");
+let bookshelf = document.getElementById("bookshelf");
 
-console.log(
-  myLibrary.forEach((book) => {
-    console.log(book);
-  })
-);
+function scanForBooks() {
+  updatedLibrary.forEach((book, index) => {
+    let bookContainer = document.createElement("div");
+    bookContainer.classList.add("book-container");
 
-let bookshelf = document.getElementById("main-container");
+    let bookData = document.createElement("p");
 
-myLibrary.forEach((book, index) => {
-  let bookContainer = document.createElement("div");
-  bookContainer.classList.add("book-container");
+    bookData.innerHTML =
+      "<p>" +
+      "Author: " +
+      book.author +
+      "</p>" +
+      "<p>" +
+      "Pages: " +
+      book.pages +
+      "</p>" +
+      "<p>" +
+      "Read: " +
+      book.isRead +
+      "</p>";
+    bookContainer.innerHTML =
+      "<p class = 'book-title'>" +
+      book.title +
+      "</p>" +
+      "<div class = 'book-data'>" +
+      bookData.innerHTML +
+      "</div>";
+    bookshelf.appendChild(bookContainer);
+    updatedLibrary.splice(index, 1);
+  });
+}
 
-  let bookData = document.createElement("p");
+scanForBooks();
 
-  bookData.innerHTML =
-    "<p>" +
-    "Author: " +
-    book.author +
-    "</p>" +
-    "<p>" +
-    "Pages: " +
-    book.pages +
-    "</p>" +
-    "<p>" +
-    "Read: " +
-    book.isRead +
-    "</p>";
-  bookContainer.innerHTML =
-    "<p class = 'book-title'>" +
-    book.title +
-    "</p>" +
-    "<div class = 'book-data'>" +
-    bookData.innerHTML +
-    "</div>";
-  bookshelf.appendChild(bookContainer);
+const addBookDialog = document.getElementById("add-book-dialog");
+const showAddBookDialog = document.getElementById("open-add-book-dialog");
+const closeAddBookDialog = document.getElementById("close-add-book-dialog");
+
+showAddBookDialog.addEventListener("click", () => addBookDialog.showModal());
+closeAddBookDialog.addEventListener("click", () => addBookDialog.close());
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(form);
+  const formObject = Object.fromEntries(formData);
+
+  addNewBook(
+    formObject.title,
+    formObject.author,
+    formObject.pages,
+    formObject.isRead
+  );
+  updatedLibrary = myLibrary;
+  scanForBooks();
+  addBookDialog.close();
 });
