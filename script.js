@@ -20,6 +20,7 @@ function addNewBook(title, author, pages, isRead) {
 let bookshelf = document.getElementById("bookshelf");
 
 function scanForBooks() {
+  updatedLibrary = structuredClone(myLibrary);
   updatedLibrary.forEach((book, index) => {
     let bookContainer = document.createElement("div");
     bookContainer.classList.add("book-container");
@@ -73,7 +74,6 @@ form.addEventListener("submit", (event) => {
     formObject.pages,
     formObject.isRead
   );
-  updatedLibrary = myLibrary;
   scanForBooks();
   addBookDialog.close();
 });
@@ -84,4 +84,4 @@ removeAllBooks.addEventListener("click", () => {
   myLibrary = [];
   updatedLibrary = [];
   bookshelf.innerHTML = "";
-})
+});
