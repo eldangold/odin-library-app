@@ -10,7 +10,11 @@ function Book(title, author, pages, isRead, id) {
 }
 
 function addNewBook(title, author, pages, isRead) {
-  myLibrary.push(new Book(title, author, pages, isRead, crypto.randomUUID()));
+  if (isRead == "on") {
+    myLibrary.push(new Book(title, author, pages, "Yes", crypto.randomUUID()));
+  } else if (isRead == undefined) {
+    myLibrary.push(new Book(title, author, pages, "No", crypto.randomUUID()));
+  }
 }
 
 let bookshelf = document.getElementById("bookshelf");
