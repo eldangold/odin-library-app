@@ -17,7 +17,7 @@
         </div>
         <div id="bookshelf"></div>
         <dialog id="add-book-dialog">
-            <form>
+            <form id="form">
                 <label>
                     Book name
                     <input type="text" name="title">
@@ -34,11 +34,11 @@
                     Is book read?
                     <input type="checkbox" name="isRead">
                 </label>
-                <div class="form-buttons">
-                    <button class="form-button" type="submit">Add</button>
-                    <button id="close-add-book-dialog" class="form-button">Cancel</button>
-                </div>
             </form>
+            <div class="form-buttons">
+                <button class="form-button" type="submit" id="submit-book" form="form">Add</button>
+                <button class="form-button" id="close-add-book-dialog">Cancel</button>
+            </div>
         </dialog>
     </div>
 </body>

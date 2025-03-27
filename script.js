@@ -56,7 +56,7 @@ const closeAddBookDialog = document.getElementById("close-add-book-dialog");
 showAddBookDialog.addEventListener("click", () => addBookDialog.showModal());
 closeAddBookDialog.addEventListener("click", () => addBookDialog.close());
 
-const form = document.querySelector("form");
+const form = document.getElementById("form");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
