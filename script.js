@@ -1,5 +1,4 @@
-let myLibrary = [];
-let updatedLibrary = [];
+const myLibrary = [];
 
 function Book(title, author, pages, isRead, id) {
   this.title = title;
@@ -20,8 +19,8 @@ function addNewBook(title, author, pages, isRead) {
 let bookshelf = document.getElementById("bookshelf");
 
 function scanForBooks() {
-  updatedLibrary = structuredClone(myLibrary);
-  updatedLibrary.forEach((book, index) => {
+  bookshelf.innerHTML = "";
+  myLibrary.forEach((book, index) => {
     let bookContainer = document.createElement("div");
     bookContainer.classList.add("book-container");
 
@@ -48,7 +47,6 @@ function scanForBooks() {
       bookData.innerHTML +
       "</div>";
     bookshelf.appendChild(bookContainer);
-    updatedLibrary.splice(index, 1);
   });
 }
 
@@ -81,7 +79,6 @@ form.addEventListener("submit", (event) => {
 const removeAllBooks = document.getElementById("clearLibrary");
 
 removeAllBooks.addEventListener("click", () => {
-  myLibrary = [];
-  updatedLibrary = [];
+  myLibrary.length = 0;
   bookshelf.innerHTML = "";
 });
