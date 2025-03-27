@@ -67,7 +67,7 @@ body {
 
 input:not([type="checkbox"]) {
   width: 100%;
-  height: 3em;
+  font-size: 0.5em;
 }
 
 dialog {
@@ -78,12 +78,32 @@ dialog {
 form {
   display: flex;
   flex-direction: column;
-  min-height: 37vh;
-  min-width: 50vw;
   font-size: 3em;
 }
 
 .form-buttons {
   display: flex;
   justify-content: space-evenly;
+
+  & :first-child {
+    background-color: green;
+  }
+
+  & :last-child {
+    background-color: red;
+  }
+}
+
+.label-read-status {
+  display: flex;
+  gap: 1w;
+
+  & input[type="checkbox"] {
+    width: 3em;
+  }
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(10px);
 }

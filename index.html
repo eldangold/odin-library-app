@@ -20,17 +20,17 @@
             <form id="form">
                 <label>
                     Book name
-                    <input type="text" name="title">
+                    <input type="text" name="title" placeholder="Example: Alice's Adventures in Wonderland" required>
                 </label>
                 <label>
                     Author
-                    <input type="text" name="author">
+                    <input type="text" name="author" placeholder="Example: Lewis Carroll">
                 </label>
                 <label>
                     Pages count
-                    <input type="number" min="1" name="pages">
+                    <input type="number" min="1" name="pages" required>
                 </label>
-                <label>
+                <label class="label-read-status">
                     Is book read?
                     <input type="checkbox" name="isRead">
                 </label>
