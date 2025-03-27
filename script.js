@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 let updatedLibrary = [];
 
 function Book(title, author, pages, isRead, id) {
@@ -77,3 +77,11 @@ form.addEventListener("submit", (event) => {
   scanForBooks();
   addBookDialog.close();
 });
+
+const removeAllBooks = document.getElementById("clearLibrary");
+
+removeAllBooks.addEventListener("click", () => {
+  myLibrary = [];
+  updatedLibrary = [];
+  bookshelf.innerHTML = "";
+})
