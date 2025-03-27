@@ -32,6 +32,8 @@ function scanForBooks() {
 
     let changeReadStatusButton = document.createElement("button");
     changeReadStatusButton.classList.add("change-read-status-button");
+    if (book.isRead == "No") changeReadStatusButton.textContent = "Mark as read";
+    else if (book.isRead == "Yes") changeReadStatusButton.textContent = "Mark as unread";
 
     bookData.innerHTML =
       "<p>" +
