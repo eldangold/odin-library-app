@@ -30,6 +30,9 @@ function scanForBooks() {
     removeBookButton.textContent = "Remove book";
     removeBookButton.classList.add("remove-book-button");
 
+    let changeReadStatusButton = document.createElement("button");
+    changeReadStatusButton.classList.add("change-read-status-button");
+
     bookData.innerHTML =
       "<p>" +
       "Author: " +
@@ -52,16 +55,28 @@ function scanForBooks() {
       "</div>";
 
     removeBookButton.addEventListener("click", (event) => {
-      myLibrary.splice(
-        myLibrary
-          .map((book) => book.id)
-          .indexOf(event.target.parentElement.getAttribute("data-id")),
-        1
-      );
+      let bookID = myLibrary
+        .map((book) => book.id)
+        .indexOf(event.target.parentElement.getAttribute("data-id"));
+
+      myLibrary.splice(bookID, 1);
+      scanForBooks();
+    });
+
+    changeReadStatusButton.addEventListener("click", (event) => {
+      let bookID = myLibrary
+        .map((book) => book.id)
+        .indexOf(event.target.parentElement.getAttribute("data-id"));
+
+      if (myLibrary[bookID].isRead == "No") myLibrary[bookID].isRead = "Yes";
+      else if (myLibrary[bookID].isRead == "Yes")
+        myLibrary[bookID].isRead = "No";
+
       scanForBooks();
     });
 
     bookContainer.appendChild(removeBookButton);
+    bookContainer.appendChild(changeReadStatusButton);
     bookshelf.appendChild(bookContainer);
   });
 }
