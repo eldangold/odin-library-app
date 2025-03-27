@@ -23,8 +23,12 @@ function scanForBooks() {
   myLibrary.forEach((book, index) => {
     let bookContainer = document.createElement("div");
     bookContainer.classList.add("book-container");
+    bookContainer.dataset.id = book.id;
+    let bookData = document.createElement("div");
 
-    let bookData = document.createElement("p");
+    let removeBookButton = document.createElement("button");
+    removeBookButton.textContent = "Remove book";
+    removeBookButton.classList.add("remove-book-button");
 
     bookData.innerHTML =
       "<p>" +
@@ -46,6 +50,18 @@ function scanForBooks() {
       "<div class = 'book-data'>" +
       bookData.innerHTML +
       "</div>";
+
+    removeBookButton.addEventListener("click", (event) => {
+      myLibrary.splice(
+        myLibrary
+          .map((book) => book.id)
+          .indexOf(event.target.parentElement.getAttribute("data-id")),
+        1
+      );
+      scanForBooks();
+    });
+
+    bookContainer.appendChild(removeBookButton);
     bookshelf.appendChild(bookContainer);
   });
 }
