@@ -32,8 +32,13 @@ function scanForBooks() {
 
     let changeReadStatusButton = document.createElement("button");
     changeReadStatusButton.classList.add("change-read-status-button");
-    if (book.isRead == "No") changeReadStatusButton.textContent = "Mark as read";
-    else if (book.isRead == "Yes") changeReadStatusButton.textContent = "Mark as unread";
+    if (book.isRead == "No")
+      changeReadStatusButton.textContent = "Mark as read";
+    else if (book.isRead == "Yes")
+      changeReadStatusButton.textContent = "Mark as unread";
+
+    let bookControlButtons = document.createElement("div");
+    bookControlButtons.classList.add("book-control-buttons");
 
     bookData.innerHTML =
       "<p>" +
@@ -59,7 +64,7 @@ function scanForBooks() {
     removeBookButton.addEventListener("click", (event) => {
       let bookID = myLibrary
         .map((book) => book.id)
-        .indexOf(event.target.parentElement.getAttribute("data-id"));
+        .indexOf(event.target.parentElement.parentElement.getAttribute("data-id"));
 
       myLibrary.splice(bookID, 1);
       scanForBooks();
@@ -68,7 +73,7 @@ function scanForBooks() {
     changeReadStatusButton.addEventListener("click", (event) => {
       let bookID = myLibrary
         .map((book) => book.id)
-        .indexOf(event.target.parentElement.getAttribute("data-id"));
+        .indexOf(event.target.parentElement.parentElement.getAttribute("data-id"));
 
       if (myLibrary[bookID].isRead == "No") myLibrary[bookID].isRead = "Yes";
       else if (myLibrary[bookID].isRead == "Yes")
@@ -77,8 +82,9 @@ function scanForBooks() {
       scanForBooks();
     });
 
-    bookContainer.appendChild(removeBookButton);
-    bookContainer.appendChild(changeReadStatusButton);
+    bookControlButtons.appendChild(removeBookButton);
+    bookControlButtons.appendChild(changeReadStatusButton);
+    bookContainer.appendChild(bookControlButtons);
     bookshelf.appendChild(bookContainer);
   });
 }

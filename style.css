@@ -3,42 +3,76 @@ body {
   background-size: cover;
   display: grid;
   place-content: center;
-  margin: 0;
-  padding: 0;
   min-height: 100vh;
   font-family: sans-serif;
 }
 
 #main-container {
   display: grid;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: min-content max-content;
   gap: 50px;
-  background-color: black;
-  opacity: 0.7;
+  background: rgba(0, 0, 0, 0.7);
   min-height: 80vh;
   min-width: 80vw;
   padding: 50px;
   border-radius: 10px;
-  overflow: auto;
 }
 
 #bookshelf {
+  height: fit-content;
   display: grid;
-  grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
-  grid-template-columns: repeat(4, minmax(50px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 50px;
+  
 }
+
+button {
+  border-radius: 4px;
+  border-style: none;
+}
+
 
 .book-container {
   background-color: lightgray;
   border-radius: 4px;
   display: grid;
-  place-content: center;
+  place-items: center;
+  padding: 20px;
+  font-size: clamp(1em, 1.25em, 2em);
+  grid-template-rows: 1fr 3fr;
+}
+
+.book-title {
+  font-weight: bold;
+  font-size: clamp(1.15em, 1.3em, 2em);
+  margin: 0;
+}
+
+.book-control-buttons {
+  width: 100%;
+
+  & button {
+    display: block;
+    width: 100%;
+    font-size: clamp(1.15em, 1.3em, 2em);
+    font-weight: bold;
+  }
+
+  & :first-child {
+    background-color: red;
+    margin-bottom: 20px;
+  }
+
+  & :last-child {
+    background-color: grey;
+  }
 }
 
 .control-buttons {
   display: grid;
-  grid-template-columns: repeat(2, 20vw);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10%;
   justify-content: space-evenly;
 
   & :first-child {
@@ -52,22 +86,13 @@ body {
 
 .control-button,
 .form-button {
-  border-radius: 4px;
-  border-style: none;
-  font-size: 3em;
-}
-
-.control-button {
-  height: 100%;
-}
-
-.form-button {
-  min-width: 20vw;
+  font-size: 2.5em;
 }
 
 input:not([type="checkbox"]) {
   width: 100%;
   font-size: 0.5em;
+  box-sizing: border-box;
 }
 
 dialog {
@@ -78,12 +103,19 @@ dialog {
 form {
   display: flex;
   flex-direction: column;
-  font-size: 3em;
+  font-size: 2.5em;
+  gap: 1.5vh;
+  margin-bottom: 1.5vh;
+}
+
+label {
+  margin-bottom: 1vh;
 }
 
 .form-buttons {
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10%;
 
   & :first-child {
     background-color: green;
@@ -96,7 +128,6 @@ form {
 
 .label-read-status {
   display: flex;
-  gap: 1w;
 
   & input[type="checkbox"] {
     width: 3em;
