@@ -50,7 +50,7 @@ function scanForBooks() {
         "Pages: " +
         book.pages +
         "</p>" +
-        "<p>" +
+        "<p class = 'read-status'>" +
         "Read: " +
         book.isRead +
         "</p>";
@@ -83,6 +83,9 @@ function scanForBooks() {
         if (myLibrary[bookID].isRead == "No") myLibrary[bookID].isRead = "Yes";
         else if (myLibrary[bookID].isRead == "Yes")
           myLibrary[bookID].isRead = "No";
+        event.target.parentElement.parentElement.querySelector(
+          ".read-status"
+        ).textContent = "Read: " + myLibrary[bookID].isRead;
       });
 
       bookControlButtons.appendChild(removeBookButton);
