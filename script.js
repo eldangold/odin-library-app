@@ -19,73 +19,77 @@ function addNewBook(title, author, pages, isRead) {
 let bookshelf = document.getElementById("bookshelf");
 
 function scanForBooks() {
-  bookshelf.innerHTML = "";
+  //bookshelf.innerHTML = "";
   myLibrary.forEach((book, index) => {
-    let bookContainer = document.createElement("div");
-    bookContainer.classList.add("book-container");
-    bookContainer.dataset.id = book.id;
-    let bookData = document.createElement("div");
+    if (document.querySelector(`[data-id="${book.id}"]`) == null) {
+      let bookContainer = document.createElement("div");
+      bookContainer.classList.add("book-container");
+      bookContainer.dataset.id = book.id;
+      let bookData = document.createElement("div");
 
-    let removeBookButton = document.createElement("button");
-    removeBookButton.textContent = "Remove book";
-    removeBookButton.classList.add("remove-book-button");
+      let removeBookButton = document.createElement("button");
+      removeBookButton.textContent = "Remove book";
+      removeBookButton.classList.add("remove-book-button");
 
-    let changeReadStatusButton = document.createElement("button");
-    changeReadStatusButton.classList.add("change-read-status-button");
-    if (book.isRead == "No")
-      changeReadStatusButton.textContent = "Mark as read";
-    else if (book.isRead == "Yes")
-      changeReadStatusButton.textContent = "Mark as unread";
+      let changeReadStatusButton = document.createElement("button");
+      changeReadStatusButton.classList.add("change-read-status-button");
+      if (book.isRead == "No")
+        changeReadStatusButton.textContent = "Mark as read";
+      else if (book.isRead == "Yes")
+        changeReadStatusButton.textContent = "Mark as unread";
 
-    let bookControlButtons = document.createElement("div");
-    bookControlButtons.classList.add("book-control-buttons");
+      let bookControlButtons = document.createElement("div");
+      bookControlButtons.classList.add("book-control-buttons");
 
-    bookData.innerHTML =
-      "<p>" +
-      "Author: " +
-      book.author +
-      "</p>" +
-      "<p>" +
-      "Pages: " +
-      book.pages +
-      "</p>" +
-      "<p>" +
-      "Read: " +
-      book.isRead +
-      "</p>";
-    bookContainer.innerHTML =
-      "<p class = 'book-title'>" +
-      book.title +
-      "</p>" +
-      "<div class = 'book-data'>" +
-      bookData.innerHTML +
-      "</div>";
+      bookData.innerHTML =
+        "<p>" +
+        "Author: " +
+        book.author +
+        "</p>" +
+        "<p>" +
+        "Pages: " +
+        book.pages +
+        "</p>" +
+        "<p>" +
+        "Read: " +
+        book.isRead +
+        "</p>";
+      bookContainer.innerHTML =
+        "<p class = 'book-title'>" +
+        book.title +
+        "</p>" +
+        "<div class = 'book-data'>" +
+        bookData.innerHTML +
+        "</div>";
 
-    removeBookButton.addEventListener("click", (event) => {
-      let bookID = myLibrary
-        .map((book) => book.id)
-        .indexOf(event.target.parentElement.parentElement.getAttribute("data-id"));
+      removeBookButton.addEventListener("click", (event) => {
+        let bookID = myLibrary
+          .map((book) => book.id)
+          .indexOf(
+            event.target.parentElement.parentElement.getAttribute("data-id")
+          );
 
-      myLibrary.splice(bookID, 1);
-      scanForBooks();
-    });
+        myLibrary.splice(bookID, 1);
+        event.target.parentElement.parentElement.remove();
+      });
 
-    changeReadStatusButton.addEventListener("click", (event) => {
-      let bookID = myLibrary
-        .map((book) => book.id)
-        .indexOf(event.target.parentElement.parentElement.getAttribute("data-id"));
+      changeReadStatusButton.addEventListener("click", (event) => {
+        let bookID = myLibrary
+          .map((book) => book.id)
+          .indexOf(
+            event.target.parentElement.parentElement.getAttribute("data-id")
+          );
 
-      if (myLibrary[bookID].isRead == "No") myLibrary[bookID].isRead = "Yes";
-      else if (myLibrary[bookID].isRead == "Yes")
-        myLibrary[bookID].isRead = "No";
+        if (myLibrary[bookID].isRead == "No") myLibrary[bookID].isRead = "Yes";
+        else if (myLibrary[bookID].isRead == "Yes")
+          myLibrary[bookID].isRead = "No";
+      });
 
-      scanForBooks();
-    });
-
-    bookControlButtons.appendChild(removeBookButton);
-    bookControlButtons.appendChild(changeReadStatusButton);
-    bookContainer.appendChild(bookControlButtons);
-    bookshelf.appendChild(bookContainer);
+      bookControlButtons.appendChild(removeBookButton);
+      bookControlButtons.appendChild(changeReadStatusButton);
+      bookContainer.appendChild(bookControlButtons);
+      bookshelf.appendChild(bookContainer);
+    }
   });
 }
 
