@@ -38,6 +38,8 @@ function scanForBooks() {
       else if (book.isRead == "Yes")
         changeReadStatusButton.textContent = "Mark as unread";
 
+      if(book.author == "") book.author = "Not specified";
+
       let bookControlButtons = document.createElement("div");
       bookControlButtons.classList.add("book-control-buttons");
 
