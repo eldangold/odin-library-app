@@ -19,7 +19,6 @@ function addNewBook(title, author, pages, isRead) {
 let bookshelf = document.getElementById("bookshelf");
 
 function scanForBooks() {
-  //bookshelf.innerHTML = "";
   myLibrary.forEach((book, index) => {
     if (document.querySelector(`[data-id="${book.id}"]`) == null) {
       let bookContainer = document.createElement("div");
